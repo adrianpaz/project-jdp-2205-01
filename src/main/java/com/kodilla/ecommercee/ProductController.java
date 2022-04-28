@@ -1,29 +1,35 @@
 package com.kodilla.ecommercee;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @RestController
+@RequestMapping("/v1/product")
 public class ProductController {
-    public List<ProductDto> getProducts() {
+
+    public List<> getProducts() {
         return new ArrayList<>();
     }
 
-    public ProductDto getProduct() {
-        return new ProductDto();
+    @GetMapping()
+    public String getProduct() {
+        return "Product";
     }
 
-    public void createProduct() {
-
+    @PostMapping()
+    public String createProduct() {
+        return "Product has been created";
     }
 
-    public ProductDto updateProduct() {
-        return new ProductDto();
+    @PutMapping()
+    public String updateProduct() {
+        return "Product has benn updated";
     }
 
-    public void deleteProduct() {
-
+    @DeleteMapping()
+    public String deleteProduct() {
+        return "Product has been deleted";
     }
 }
