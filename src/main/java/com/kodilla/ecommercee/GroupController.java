@@ -13,17 +13,17 @@ public class GroupController {
     }
 
     @DeleteMapping()
-    public String deleteTask() {
+    public String deleteGroup() {
         return "Group has been deleted";
     }
 
     @PutMapping
-    public String updateTask() {
+    public String updateGroup() {
         return "Group has been update";
     }
 
     @PostMapping()
-    public String createTask() {
+    public String createGroup() {
         return "Group has been added";
     }
 }
