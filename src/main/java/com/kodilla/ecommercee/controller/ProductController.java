@@ -11,7 +11,7 @@ import java.util.List;
 @RequestMapping("/v1/products")
 public class ProductController {
 
-    @GetMapping()
+    @GetMapping
     public ResponseEntity<List<ProductDto>> getProducts() {
         return ResponseEntity.ok(new ArrayList<>());
     }
@@ -21,8 +21,8 @@ public class ProductController {
         return ResponseEntity.ok().build();
     }
 
-    @PostMapping()
-    public ResponseEntity<Void> createProduct() {
+    @PostMapping
+    public ResponseEntity<Void> createProduct(@RequestBody ProductDto productDto) {
         return ResponseEntity.ok().build();
     }
 
