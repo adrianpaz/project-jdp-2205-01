@@ -9,16 +9,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/v1/group")
+@RequestMapping("/v1/groups")
 public class GroupController {
 
-    @GetMapping()
+    @GetMapping
     public ResponseEntity<List<GroupDto>> getAllGroups() {
         return ResponseEntity.ok(new ArrayList<>());
     }
 
-    @PostMapping()
-    public ResponseEntity<Void> createGroup() {
+    @PostMapping
+    @ResponseBody
+    public ResponseEntity<Void> createGroup(@RequestBody GroupDto groupDto) {
         return ResponseEntity.ok().build();
     }
 
@@ -27,9 +28,10 @@ public class GroupController {
         return ResponseEntity.ok(new GroupDto());
     }
 
-    @PutMapping(value = "{groupId}")
-    public ResponseEntity<GroupDto> updateGroup(@PathVariable int groupId) {
-        return ResponseEntity.ok(new GroupDto());
+    @PutMapping()
+    @ResponseBody
+    public ResponseEntity<GroupDto> updateGroup(@RequestBody GroupDto groupDto) {
+        return ResponseEntity.ok(groupDto);
     }
 
 
