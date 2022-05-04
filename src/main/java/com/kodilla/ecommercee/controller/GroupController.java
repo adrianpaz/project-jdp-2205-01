@@ -1,7 +1,7 @@
 package com.kodilla.ecommercee.controller;
 
 import com.kodilla.ecommercee.dto.GroupDto;
-import org.springframework.http.MediaType;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,7 +18,6 @@ public class GroupController {
     }
 
     @PostMapping
-    @ResponseBody
     public ResponseEntity<Void> createGroup(@RequestBody GroupDto groupDto) {
         return ResponseEntity.ok().build();
     }
@@ -29,7 +28,6 @@ public class GroupController {
     }
 
     @PutMapping()
-    @ResponseBody
     public ResponseEntity<GroupDto> updateGroup(@RequestBody GroupDto groupDto) {
         return ResponseEntity.ok(groupDto);
     }
