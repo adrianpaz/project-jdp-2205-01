@@ -5,9 +5,6 @@ import com.kodilla.ecommercee.dto.ItemDto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @RestController
 @RequestMapping("/v1/carts")
 public class CartController {
@@ -18,22 +15,22 @@ public class CartController {
     }
 
     @GetMapping(value = "{cartId}")
-    public ResponseEntity<List<ItemDto>> getItemsFromCart(@PathVariable Long cartId) {
-        return ResponseEntity.ok(new ArrayList<>());
-    }
-
-    @PutMapping
-    public ResponseEntity<CartDto> addItemToCart(Long cartId, @RequestBody ItemDto ItemDto) {
+    public ResponseEntity<CartDto> getItemsFromCart(@PathVariable Long cartId) {
         return ResponseEntity.ok(new CartDto());
     }
 
-    @DeleteMapping(value = "{itemId}")
-    public ResponseEntity<Void> deleteProductFromCart(Long cartId, @PathVariable Long itemId) {
+    @PutMapping(value = "{cartId}")
+    public ResponseEntity<CartDto> addItemToCart(@PathVariable Long cartId, @RequestBody ItemDto ItemDto) {
+        return ResponseEntity.ok(new CartDto());
+    }
+
+    @DeleteMapping(value = "{cartId}")
+    public ResponseEntity<Void> deleteItemFromCart(@PathVariable Long cartId, @RequestBody Long itemId) {
         return ResponseEntity.ok().build();
     }
 
     @PostMapping(value = "{cartId}")
-    public ResponseEntity<Void> createOrder(Long userId, @PathVariable Long cartId) {
+    public ResponseEntity<Void> createOrder(@PathVariable Long cartId) {
         return ResponseEntity.ok().build();
     }
 }
