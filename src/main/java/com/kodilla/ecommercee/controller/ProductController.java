@@ -27,8 +27,8 @@ public class ProductController {
     }
 
     @PutMapping(value = "{productId}")
-    public ResponseEntity<Void> updateProduct(@RequestBody ProductDto productDto, @PathVariable Long productId) {
-        return ResponseEntity.ok().build();
+    public ResponseEntity<ProductDto> updateProduct(@RequestBody ProductDto productDto, @PathVariable Long productId) {
+        return ResponseEntity.ok(productDto);
     }
 
     @DeleteMapping(value = "{productId}")
