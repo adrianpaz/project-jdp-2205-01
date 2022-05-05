@@ -27,8 +27,8 @@ public class GroupController {
         return ResponseEntity.ok(new GroupDto());
     }
 
-    @PutMapping()
-    public ResponseEntity<GroupDto> updateGroup(@RequestBody GroupDto groupDto) {
+    @PutMapping(value = "{groupId}")
+    public ResponseEntity<GroupDto> updateGroup(@PathVariable Long groupId,@RequestBody GroupDto groupDto) {
         return ResponseEntity.ok(groupDto);
     }
 
