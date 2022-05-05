@@ -1,6 +1,6 @@
 package com.kodilla.ecommercee.dto;
 
-public class Group {
+public class GroupDto {
 
 
 }

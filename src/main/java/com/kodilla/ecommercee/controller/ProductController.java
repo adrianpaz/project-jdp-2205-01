@@ -17,8 +17,8 @@ public class ProductController {
     }
 
     @GetMapping(value = "{productId}")
-    public ResponseEntity<Void> getProduct(@PathVariable Long productId) {
-        return ResponseEntity.ok().build();
+    public ResponseEntity<ProductDto> getProduct(@PathVariable Long productId) {
+        return ResponseEntity.ok(new ProductDto());
     }
 
     @PostMapping
@@ -27,7 +27,7 @@ public class ProductController {
     }
 
     @PutMapping(value = "{productId}")
-    public ResponseEntity<Void> updateProduct(@PathVariable Long productId) {
+    public ResponseEntity<Void> updateProduct(@RequestBody ProductDto productDto, @PathVariable Long productId) {
         return ResponseEntity.ok().build();
     }
 
