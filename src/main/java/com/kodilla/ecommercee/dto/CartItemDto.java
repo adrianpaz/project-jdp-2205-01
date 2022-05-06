@@ -2,7 +2,7 @@ package com.kodilla.ecommercee.dto;
 
 import java.math.BigDecimal;
 
-public class ItemDto {
+public class CartItemDto {
 
     private Long id;
     private ProductDto productDto;

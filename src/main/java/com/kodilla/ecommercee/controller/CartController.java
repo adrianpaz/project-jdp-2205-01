@@ -1,7 +1,7 @@
 package com.kodilla.ecommercee.controller;
 
 import com.kodilla.ecommercee.dto.CartDto;
-import com.kodilla.ecommercee.dto.ItemDto;
+import com.kodilla.ecommercee.dto.CartItemDto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,12 +20,12 @@ public class CartController {
     }
 
     @PutMapping(value = "{cartId}")
-    public ResponseEntity<CartDto> addItemToCart(@PathVariable Long cartId, @RequestBody ItemDto ItemDto) {
+    public ResponseEntity<CartDto> addItemToCart(@PathVariable Long cartId, @RequestBody CartItemDto cartItemDto) {
         return ResponseEntity.ok(new CartDto());
     }
 
     @DeleteMapping(value = "{cartId}")
-    public ResponseEntity<Void> deleteItemFromCart(@PathVariable Long cartId, @RequestBody Long itemId) {
+    public ResponseEntity<Void> deleteItemFromCart(@PathVariable Long cartId, @RequestBody Long cartItemId) {
         return ResponseEntity.ok().build();
     }
 
