@@ -31,6 +31,4 @@ public class GroupController {
     public ResponseEntity<GroupDto> updateGroup(@PathVariable Long groupId,@RequestBody GroupDto groupDto) {
         return ResponseEntity.ok(groupDto);
     }
-
-
 }
