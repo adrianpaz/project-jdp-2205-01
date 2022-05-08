@@ -2,9 +2,9 @@ package com.kodilla.ecommercee.dto;
 
 import java.util.List;
 
-public class CartDto {
+public class OrderDto {
 
     private Long id;
     private Long userId;
-    private List<CartItemDto> cartItems;
+    private List<OrderItemDto> orderItems;
 }
