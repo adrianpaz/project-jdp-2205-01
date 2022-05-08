@@ -11,13 +11,13 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "orders")
+@Table(name = "ORDERS")
 public final class Order {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @NotNull
-    @Column(name = "id")
+    @Column(name = "ID")
     private Long id;
 
     @ManyToOne
