@@ -1,6 +1,9 @@
 package com.kodilla.ecommercee.domain;
 
-import lombok.*;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -9,8 +12,8 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "USERS")
-public class User {
+@Table(name = "PRODUCTS")
+public class Product {
 
     @Id
     @GeneratedValue
