@@ -29,5 +29,5 @@ public class OrderItem {
     private Order order;
 
     @Column(name = "QUANTITY")
-    private Long quantity;
+    private int quantity;
 }
