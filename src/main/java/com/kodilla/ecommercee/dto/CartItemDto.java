@@ -6,6 +6,7 @@ public class CartItemDto {
 
     private Long id;
     private ProductDto productDto;
+    private CartDto cartDto;
     private int quantity;
     private BigDecimal cost;
 }
