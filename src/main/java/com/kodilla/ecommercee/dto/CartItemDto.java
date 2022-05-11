@@ -1,7 +1,5 @@
 package com.kodilla.ecommercee.dto;
 
-import com.kodilla.ecommercee.domain.Cart;
-import com.kodilla.ecommercee.domain.Product;
 import lombok.*;
 
 import java.math.BigDecimal;
@@ -12,8 +10,8 @@ import java.math.BigDecimal;
 public class CartItemDto {
 
     private Long id;
-    private Product product;
-    private Cart cart;
+    private ProductDto productDto;
+    private CartDto cartDto;
     private int quantity;
     private BigDecimal cost;
 }

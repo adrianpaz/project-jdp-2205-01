@@ -1,6 +1,5 @@
 package com.kodilla.ecommercee.dto;
 
-import com.kodilla.ecommercee.domain.Product;
 import lombok.*;
 
 @Data
@@ -9,5 +8,5 @@ import lombok.*;
 public class OrderItemDto {
 
     private Long id;
-    private Product product;
+    private Long cartId;
 }
