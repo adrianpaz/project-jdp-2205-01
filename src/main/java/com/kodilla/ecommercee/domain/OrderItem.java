@@ -10,8 +10,8 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "USERS")
-public class User {
+@Table(name = "ORDER_ITEMS")
+public class OrderItem {
 
     @Id
     @GeneratedValue
@@ -19,12 +19,7 @@ public class User {
     @Column(name = "ID", unique = true)
     private Long id;
 
-    @Column(name = "USERNAME")
-    private String username;
-
-    @Column(name = "STATUS")
-    private String status;
-
-    @Column(name = "USER_KEY")
-    private Long userKey;
+    @ManyToOne
+    @JoinColumn(name = "PRODUCT_ID")
+    private Product product;
 }

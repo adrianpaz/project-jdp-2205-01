@@ -24,8 +24,8 @@ public class CartController {
         return ResponseEntity.ok(new CartDto());
     }
 
-    @DeleteMapping(value = "{cartId}")
-    public ResponseEntity<Void> deleteItemFromCart(@PathVariable Long cartId, @RequestBody Long cartItemId) {
+    @DeleteMapping(value = "{cartId}/{cartItemId}")
+    public ResponseEntity<Void> deleteItemFromCart(@PathVariable Long cartId, @PathVariable Long cartItemId) {
         return ResponseEntity.ok().build();
     }
 

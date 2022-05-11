@@ -1,8 +1,7 @@
 package com.kodilla.ecommercee.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.kodilla.ecommercee.domain.Product;
+import lombok.*;
 
 import java.util.List;
 
@@ -13,5 +12,5 @@ public class GroupDto {
 
     private Long id;
     private String name;
-    private List<Long> listOfProductsId;
+    private List<Product> products;
 }

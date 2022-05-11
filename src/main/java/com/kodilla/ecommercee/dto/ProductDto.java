@@ -1,8 +1,7 @@
 package com.kodilla.ecommercee.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.kodilla.ecommercee.domain.Group;
+import lombok.*;
 
 import java.math.BigDecimal;
 
@@ -15,4 +14,5 @@ public class ProductDto {
     private String name;
     private String description;
     private BigDecimal price;
+    private Group group;
 }

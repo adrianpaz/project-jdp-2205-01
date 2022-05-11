@@ -1,14 +1,15 @@
 package com.kodilla.ecommercee.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -34,4 +35,25 @@ public class Product {
     @ManyToOne
     @JoinColumn(name = "GROUP_ID")
     private Group group;
+
+    @OneToMany(
+            targetEntity = CartItem.class,
+            mappedBy = "product",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.EAGER)
+    private List<CartItem> cartItems = new ArrayList<>();
+
+    @OneToMany(
+            targetEntity = OrderItem.class,
+            mappedBy = "product",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.EAGER)
+    private List<OrderItem> orderItems = new ArrayList<>();
+
+    public Product(String name, String description, BigDecimal price, Group group) {
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.group = group;
+    }
 }
