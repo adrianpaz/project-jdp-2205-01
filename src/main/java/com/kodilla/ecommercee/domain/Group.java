@@ -4,7 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -12,8 +12,8 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "CARTS")
-public class Cart {
+@Table(name = "GROUPS")
+public class Group {
 
     @Id
     @GeneratedValue
@@ -21,14 +21,18 @@ public class Cart {
     @Column(name = "ID", unique = true)
     private Long id;
 
-    @ManyToOne()
-    @JoinColumn(name = "USER_ID")
-    private User user;
+    @NotNull
+    @Column(name = "NAME")
+    private String name;
 
     @OneToMany(
-            targetEntity = CartItem.class,
-            mappedBy = "cart",
+            targetEntity = Product.class,
+            mappedBy = "group",
             cascade = CascadeType.ALL,
             fetch = FetchType.EAGER)
-    private List<CartItem> cartItems;
+    private List<Product> products = new ArrayList<>();
+
+    public Group(String name) {
+        this.name = name;
+    }
 }

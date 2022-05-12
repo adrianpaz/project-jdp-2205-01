@@ -1,15 +1,13 @@
 package com.kodilla.ecommercee.domain;
 
-import com.kodilla.ecommercee.dto.ProductDto;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -35,5 +33,4 @@ public class CartItem {
 
     @Column(name = "COST")
     private BigDecimal cost;
-
 }
