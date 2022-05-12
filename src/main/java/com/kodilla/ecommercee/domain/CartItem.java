@@ -4,7 +4,6 @@ import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.math.BigDecimal;
 
 @Getter
 @Setter
@@ -21,16 +20,19 @@ public class CartItem {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name ="PRODUCT_ID")
-    private Product product;
-
-    @ManyToOne
     @JoinColumn(name = "CART_ID")
     private Cart cart;
+
+    @ManyToOne
+    @JoinColumn(name ="PRODUCT_ID")
+    private Product product;
 
     @Column(name = "QUANTITY")
     private int quantity;
 
-    @Column(name = "COST")
-    private BigDecimal cost;
+    public CartItem(Cart cart, Product product, int quantity) {
+        this.cart = cart;
+        this.product = product;
+        this.quantity = quantity;
+    }
 }

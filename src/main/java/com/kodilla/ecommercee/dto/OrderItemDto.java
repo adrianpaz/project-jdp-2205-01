@@ -8,5 +8,7 @@ import lombok.*;
 public class OrderItemDto {
 
     private Long id;
-    private Long cartId;
+    private Long orderId;
+    private ProductDto productDto;
+    private int quantity;
 }

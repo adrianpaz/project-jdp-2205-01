@@ -20,13 +20,19 @@ public class OrderItem {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "PRODUCT_ID")
-    private Product product;
-
-    @ManyToOne
     @JoinColumn(name = "ORDER_ID")
     private Order order;
 
+    @ManyToOne
+    @JoinColumn(name = "PRODUCT_ID")
+    private Product product;
+
     @Column(name = "QUANTITY")
     private int quantity;
+
+    public OrderItem(Order order, Product product, int quantity) {
+        this.order = order;
+        this.product = product;
+        this.quantity = quantity;
+    }
 }

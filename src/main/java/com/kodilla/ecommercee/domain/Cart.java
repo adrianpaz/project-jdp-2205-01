@@ -5,6 +5,7 @@ import lombok.*;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -21,14 +22,18 @@ public class Cart {
     @Column(name = "ID", unique = true)
     private Long id;
 
-    @ManyToOne()
+    @OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     @JoinColumn(name = "USER_ID")
     private User user;
 
     @OneToMany(
             targetEntity = CartItem.class,
             mappedBy = "cart",
-            cascade = CascadeType.ALL,
+            cascade = CascadeType.PERSIST,
             fetch = FetchType.EAGER)
-    private List<CartItem> cartItems;
+    private List<CartItem> cartItems = new ArrayList<>();
+
+    public Cart(User user) {
+        this.user = user;
+    }
 }
