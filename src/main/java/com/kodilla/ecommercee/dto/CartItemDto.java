@@ -9,6 +9,6 @@ public class CartItemDto {
 
     private Long id;
     private Long cartId;
-    private ProductDto productDto;
+    private Long productId;
     private int quantity;
 }
