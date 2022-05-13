@@ -39,14 +39,14 @@ public class Product {
     @OneToMany(
             targetEntity = CartItem.class,
             mappedBy = "product",
-            cascade = CascadeType.ALL,
+            cascade = CascadeType.PERSIST,
             fetch = FetchType.EAGER)
     private List<CartItem> cartItems = new ArrayList<>();
 
     @OneToMany(
             targetEntity = OrderItem.class,
             mappedBy = "product",
-            cascade = CascadeType.ALL,
+            cascade = CascadeType.PERSIST,
             fetch = FetchType.EAGER)
     private List<OrderItem> orderItems = new ArrayList<>();
 

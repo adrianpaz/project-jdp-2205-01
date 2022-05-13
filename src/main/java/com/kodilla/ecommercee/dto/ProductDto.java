@@ -4,6 +4,7 @@ import com.kodilla.ecommercee.domain.Group;
 import lombok.*;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -15,4 +16,6 @@ public class ProductDto {
     private String description;
     private BigDecimal price;
     private Group group;
+    private List<CartItemDto> cartItems;
+    private List<OrderItemDto> orderItems;
 }

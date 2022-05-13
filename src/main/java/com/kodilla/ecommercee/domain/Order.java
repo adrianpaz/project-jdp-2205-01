@@ -4,12 +4,14 @@ import javax.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -29,7 +31,11 @@ public class Order {
     @OneToMany(
             targetEntity = OrderItem.class,
             mappedBy = "order",
-            cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY)
-    private List<OrderItem> orderItemList;
+            cascade = CascadeType.PERSIST,
+            fetch = FetchType.EAGER)
+    private List<OrderItem> orderItems = new ArrayList<>();
+
+    public Order(User user) {
+        this.user = user;
+    }
 }
