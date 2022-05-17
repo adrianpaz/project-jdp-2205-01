@@ -32,7 +32,7 @@ public class Order {
             targetEntity = OrderItem.class,
             mappedBy = "order",
             cascade = CascadeType.PERSIST,
-            fetch = FetchType.EAGER)
+            fetch = FetchType.LAZY)
     private List<OrderItem> orderItems = new ArrayList<>();
 
     public Order(User user) {
