@@ -22,7 +22,7 @@ public class Cart {
     @Column(name = "ID", unique = true)
     private Long id;
 
-    @OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     @JoinColumn(name = "USER_ID")
     private User user;
 
@@ -30,7 +30,7 @@ public class Cart {
             targetEntity = CartItem.class,
             mappedBy = "cart",
             cascade = CascadeType.PERSIST,
-            fetch = FetchType.EAGER)
+            fetch = FetchType.LAZY)
     private List<CartItem> cartItems = new ArrayList<>();
 
     public Cart(User user) {
