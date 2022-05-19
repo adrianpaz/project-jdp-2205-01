@@ -35,15 +35,14 @@ public class CartTest {
         Cart saveCart = cartRepository.save(cart);
         saveCart.getCartItems().add(cartItem);
         Long saveCardId = saveCart.getId();
-        CartItem saveCartItemId = cartItemRepository.save(cartItem);
+        CartItem saveCartItem = cartItemRepository.save(cartItem);
 
         //Then
-        Assert.assertTrue(cartItemRepository.existsById(saveCartItemId));
+        Assert.assertTrue(cartItemRepository.existsById(saveCartItem.getId()));
         Assert.assertTrue(cartRepository.existsById(saveCardId));
-        Assert.assertTrue(cartItemRepository.existsById(saveCartItemId));
 
         //Clean
-        cartItemRepository.deleteById(saveCardId);
+        cartItemRepository.deleteById(saveCartItem.getId());
         cartRepository.deleteById(saveCardId);
     }
 
@@ -54,29 +53,40 @@ public class CartTest {
         CartItem cartItem = new CartItem(cart, null, 1);
 
         //When
-        cart.getCartItems().add(cartItem);
         Cart saveCart = cartRepository.save(cart);
-        Long saveCartId = saveCart.getId();
+        saveCart.getCartItems().add(cartItem);
+        Long saveCardId = saveCart.getId();
+        CartItem saveCartItem = cartItemRepository.save(cartItem);
 
-        Optional<Cart> readCart = cartRepository.findById(saveCartId);
+        Optional<Cart> readCart = cartRepository.findById(saveCardId);
+        Optional<CartItem> readCartItem = cartItemRepository.findById(saveCartItem.getId());
 
         //Then
+        Assert.assertTrue(readCartItem.isPresent());
         Assert.assertTrue(readCart.isPresent());
 
         //Clean
-        cartRepository.deleteById(saveCartId);
+        cartItemRepository.deleteById(saveCartItem.getId());
+        cartRepository.deleteById(saveCardId);
     }
 
     @Test
     public void deleteCart() {
         //Given
         Cart cart = new Cart(null);
+        CartItem cartItem = new CartItem(cart, null, 1);
 
         //When
-        cartRepository.save(cart);
-        cartRepository.deleteById(cart.getId());
+        Cart saveCart = cartRepository.save(cart);
+        saveCart.getCartItems().add(cartItem);
+        Long saveCardId = saveCart.getId();
+        CartItem saveCartItem = cartItemRepository.save(cartItem);
+
+        cartItemRepository.deleteById(saveCartItem.getId());
+        cartRepository.deleteById(saveCardId);
 
         //Then
-        Assert.assertFalse(cartRepository.existsById(cart.getId()));
+        Assert.assertFalse(cartRepository.existsById(saveCardId));
+        Assert.assertFalse(cartItemRepository.existsById(saveCartItem.getId()));
     }
 }
