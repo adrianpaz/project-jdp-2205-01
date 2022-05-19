@@ -12,7 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "GROUPS")
+@Table(name = "PRODUCT_GROUPS")
 public class Group {
 
     @Id
@@ -29,7 +29,7 @@ public class Group {
             targetEntity = Product.class,
             mappedBy = "group",
             cascade = CascadeType.PERSIST,
-            fetch = FetchType.EAGER)
+            fetch = FetchType.LAZY)
     private List<Product> products = new ArrayList<>();
 
     public Group(String name) {
