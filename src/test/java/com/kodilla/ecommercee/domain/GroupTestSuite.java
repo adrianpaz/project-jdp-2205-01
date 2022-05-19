@@ -1,7 +1,6 @@
 package com.kodilla.ecommercee.domain;
 
 import com.kodilla.ecommercee.repository.*;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,11 +23,6 @@ public class GroupTestSuite {
 
     @Autowired
     private ProductRepository productRepository;
-
-    @BeforeEach
-    public void start() {
-        groupRepository.deleteAll();
-    }
 
     private Group clothes;
     private Group footwear;
@@ -80,10 +74,11 @@ public class GroupTestSuite {
 
         //Then
         assertNotNull(newGroup);
+        assertEquals("footwear", newGroup.getName());
         assertEquals(testedGroupId, newGroupId);
 
         //Cleanup
-        groupRepository.deleteAll();
+        groupRepository.deleteById(testedGroupId);
     }
 
     @Test
@@ -103,7 +98,7 @@ public class GroupTestSuite {
         assertEquals(updatedName, updatedGroup.getName());
 
         //Cleanup
-        groupRepository.deleteAll();
+        groupRepository.deleteById(updatedGroup.getId());
     }
 
     @Test
@@ -124,6 +119,6 @@ public class GroupTestSuite {
         assertEquals(1, groups1.size());
 
         //Cleanup
-        groupRepository.deleteAll();
+        groupRepository.deleteById(groups1.get(groups1.indexOf(testedGroup1)).getId());
     }
 }
