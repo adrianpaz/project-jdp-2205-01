@@ -34,7 +34,8 @@ public class User {
             targetEntity = Order.class,
             mappedBy = "user",
             cascade = CascadeType.PERSIST,
-            fetch = FetchType.LAZY)
+            fetch = FetchType.LAZY
+    )
     private List<Order> orders = new ArrayList<>();
 
     public User(String username, String status, Long userKey) {

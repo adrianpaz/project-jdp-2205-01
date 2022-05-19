@@ -30,7 +30,6 @@ public class Group {
             mappedBy = "group",
             cascade = CascadeType.PERSIST,
             fetch = FetchType.LAZY)
-    @JsonIgnore
     private List<Product> products = new ArrayList<>();
 
     public Group(String name) {
