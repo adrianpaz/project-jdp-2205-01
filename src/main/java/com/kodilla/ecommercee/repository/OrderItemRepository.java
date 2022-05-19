@@ -10,6 +10,7 @@ import java.util.List;
 @Transactional
 @Repository
 public interface OrderItemRepository extends CrudRepository<OrderItem, Long> {
+  
     @Override
     List<OrderItem> findAll();
 }
