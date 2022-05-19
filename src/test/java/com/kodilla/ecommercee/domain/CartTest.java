@@ -32,15 +32,19 @@ public class CartTest {
         CartItem cartItem = new CartItem(cart, null, 1);
 
         //When
-        cart.getCartItems().add(cartItem);
         Cart saveCart = cartRepository.save(cart);
-        Long saveCartId = saveCart.getId();
+        saveCart.getCartItems().add(cartItem);
+        Long saveCardId = saveCart.getId();
+        CartItem saveCartItemId = cartItemRepository.save(cartItem);
 
         //Then
-        Assert.assertTrue(cartRepository.existsById(saveCartId));
+        Assert.assertTrue(cartItemRepository.existsById(saveCartItemId));
+        Assert.assertTrue(cartRepository.existsById(saveCardId));
+        Assert.assertTrue(cartItemRepository.existsById(saveCartItemId));
 
         //Clean
-        cartRepository.deleteById(saveCartId);
+        cartItemRepository.deleteById(saveCardId);
+        cartRepository.deleteById(saveCardId);
     }
 
     @Test
