@@ -1,5 +1,6 @@
 package com.kodilla.ecommercee.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -21,7 +22,6 @@ public class Group {
     @Column(name = "ID", unique = true)
     private Long id;
 
-    @NotNull
     @Column(name = "NAME")
     private String name;
 
