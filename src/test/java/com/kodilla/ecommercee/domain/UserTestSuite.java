@@ -32,6 +32,8 @@ public class UserTestSuite {
 
         //When
         User savedUser = userRepository.save(user);
+        orderRepository.save(order1);
+        orderRepository.save(order2);
         savedUser.getOrders().add(order1);
         savedUser.getOrders().add(order2);
 
@@ -52,6 +54,8 @@ public class UserTestSuite {
     public void shouldReadUser(){
         //Given
         User savedUser = userRepository.save(user);
+        orderRepository.save(order1);
+        orderRepository.save(order2);
         savedUser.getOrders().add(order1);
         savedUser.getOrders().add(order2);
 
@@ -66,6 +70,8 @@ public class UserTestSuite {
         assertEquals(123L,readOrder1.getUser().getUserKey().longValue());
         assertEquals(123L,readOrder2.getUser().getUserKey().longValue());
         //CleanUp
+        orderRepository.existsById(readOrder1.getId());
+        orderRepository.existsById(readOrder2.getId());
         userRepository.deleteById(savedUser.getId());
     }
 
@@ -73,17 +79,25 @@ public class UserTestSuite {
     public void shouldDeleteUser(){
         //Given
         User savedUser = userRepository.save(user);
+        orderRepository.save(order1);
+        orderRepository.save(order2);
         savedUser.getOrders().add(order1);
         savedUser.getOrders().add(order2);
 
-        Long savedUserId = savedUser.getId();
 
+        Long savedUserId = savedUser.getId();
+        Long order1Id = savedUser.getOrders().get(savedUser.getOrders().size()-1).getId();
+        Long order2Id = savedUser.getOrders().get(savedUser.getOrders().size()-1).getId();
         //When
+        orderRepository.deleteById(savedUser.getOrders().get(savedUser.getOrders().size()-1).getId());
+        orderRepository.deleteById(savedUser.getOrders().get(savedUser.getOrders().size()-2).getId());
         userRepository.deleteById(savedUser.getId());
 
 
         //Then
         assertFalse(userRepository.existsById(savedUserId));
+        assertFalse(orderRepository.existsById(order1Id));
+        assertFalse(orderRepository.existsById(order2Id));
     }
 
 
