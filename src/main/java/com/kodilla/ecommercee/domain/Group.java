@@ -1,5 +1,6 @@
 package com.kodilla.ecommercee.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -12,7 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "GROUPS")
+@Table(name = "PRODUCT_GROUPS")
 public class Group {
 
     @Id
@@ -21,7 +22,6 @@ public class Group {
     @Column(name = "ID", unique = true)
     private Long id;
 
-    @NotNull
     @Column(name = "NAME")
     private String name;
 
@@ -29,7 +29,7 @@ public class Group {
             targetEntity = Product.class,
             mappedBy = "group",
             cascade = CascadeType.PERSIST,
-            fetch = FetchType.EAGER)
+            fetch = FetchType.LAZY)
     private List<Product> products = new ArrayList<>();
 
     public Group(String name) {
