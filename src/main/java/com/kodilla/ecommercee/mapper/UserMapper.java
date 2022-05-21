@@ -7,13 +7,15 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserMapper {
 
+    private OrderMapper orderMapper;
+
     public User mapToUser(final UserDto userDto) {
         return new User(
                 userDto.getId(),
                 userDto.getUsername(),
                 userDto.getStatus(),
                 userDto.getUserKey(),
-                null
+                orderMapper.mapToOrderList(userDto.getOrders())
         );
     }
 
@@ -23,7 +25,7 @@ public class UserMapper {
                 user.getUsername(),
                 user.getStatus(),
                 user.getUserKey(),
-                null
+                orderMapper.mapToOrderDtoList(user.getOrders())
         );
     }
 }
