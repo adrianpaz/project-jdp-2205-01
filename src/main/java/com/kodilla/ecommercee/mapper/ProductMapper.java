@@ -2,22 +2,27 @@ package com.kodilla.ecommercee.mapper;
 
 import com.kodilla.ecommercee.domain.Product;
 import com.kodilla.ecommercee.dto.ProductDto;
+import com.kodilla.ecommercee.exception.CartNotFoundException;
+import com.kodilla.ecommercee.exception.ProductNotFoundException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class ProductMapper {
+    private final CartItemMapper cartItemMapper;
 
-    public Product mapToProduct(final ProductDto productDto) {
+    public Product mapToProduct(final ProductDto productDto)  {
         return new Product(
                 productDto.getId(),
                 productDto.getName(),
                 productDto.getDescription(),
                 productDto.getPrice(),
                 productDto.getGroup(),
-                null,
+                cartItemMapper.mapToCartItemList(productDto.getCartItems()),
                 null
         );
     }
@@ -29,7 +34,7 @@ public class ProductMapper {
                 product.getDescription(),
                 product.getPrice(),
                 product.getGroup(),
-                null,
+                cartItemMapper.mapToCartItemDtoList(product.getCartItems()),
                 null
         );
     }
