@@ -71,7 +71,7 @@ public class CartController {
         Cart cart = cartService.getCart(cartId);
         List<CartItem> cartItems = cart.getCartItems();
         Order order = cartService.createOrderByCart(cart.getUser(),cartItems);
-        orderService.save(order);
+        orderService.saveOrder(order);
         cartService.removeAllCartItems(cartId);
         productService.removeCartItems(cartItems);
         cartItemService.deleteCartItemList(cartItems);
