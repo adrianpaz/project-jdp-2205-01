@@ -2,12 +2,14 @@ package com.kodilla.ecommercee.mapper;
 
 import com.kodilla.ecommercee.domain.User;
 import com.kodilla.ecommercee.dto.UserDto;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class UserMapper {
 
-    private OrderMapper orderMapper;
+    private final OrderMapper orderMapper;
 
     public User mapToUser(final UserDto userDto) {
         return new User(
