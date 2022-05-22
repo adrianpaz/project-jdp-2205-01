@@ -1,20 +1,14 @@
 package com.kodilla.ecommercee.mapper;
 
-import com.kodilla.ecommercee.domain.CartItem;
 import com.kodilla.ecommercee.domain.Product;
-import com.kodilla.ecommercee.dto.CartItemDto;
 import com.kodilla.ecommercee.dto.ProductDto;
-import com.kodilla.ecommercee.exception.CartNotFoundException;
 import com.kodilla.ecommercee.exception.GroupNotFoundException;
-import com.kodilla.ecommercee.exception.ProductNotFoundException;
-import com.kodilla.ecommercee.repository.GroupRepository;
 import com.kodilla.ecommercee.service.GroupDBService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -41,7 +35,7 @@ public class ProductMapper {
                 product.getName(),
                 product.getDescription(),
                 product.getPrice(),
-                groupDBService.getGroupById(product.getGroup().getId()).getId(),
+                product.getGroup().getId(),
                 cartItemMapper.mapToCartItemDtoList(product.getCartItems()),
                 orderItemMapper.mapToOrderItemDtoList(product.getOrderItems())
         );
