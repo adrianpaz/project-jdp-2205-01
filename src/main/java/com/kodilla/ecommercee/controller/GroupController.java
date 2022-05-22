@@ -39,8 +39,8 @@ public class GroupController {
         return ResponseEntity.ok(groupMapper.mapToGroupDto(groupDBService.getGroupById(groupId)));
     }
 
-    @PutMapping(value = "{groupId}")
-    public ResponseEntity<GroupDto> updateGroup(@PathVariable Long groupId, @RequestBody GroupDto groupDto) {
+    @PutMapping
+    public ResponseEntity<GroupDto> updateGroup(@RequestBody GroupDto groupDto) {
         Group group = groupMapper.mapToGroup(groupDto);
         Group saveGroup = groupDBService.saveGroup(group);
         return ResponseEntity.ok(groupMapper.mapToGroupDto(saveGroup));

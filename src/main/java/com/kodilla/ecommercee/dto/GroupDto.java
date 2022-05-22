@@ -13,8 +13,4 @@ public class GroupDto {
     private String name;
     private List<ProductDto> products;
 
-    public GroupDto(Long id, String name) {
-        this.id = id;
-        this.name = name;
-    }
 }
