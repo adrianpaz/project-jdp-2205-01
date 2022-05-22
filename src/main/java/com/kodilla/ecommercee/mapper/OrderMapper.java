@@ -35,4 +35,10 @@ public class OrderMapper {
                 .map(this::mapToOrderDto)
                 .collect(Collectors.toList());
     }
+
+    public List<Order> mapToOrderList(final List<OrderDto> orderDtoList) {
+        return orderDtoList.stream()
+                .map(this::mapToOrder)
+                .collect(Collectors.toList());
+    }
 }
