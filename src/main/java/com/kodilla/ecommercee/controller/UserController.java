@@ -21,26 +21,19 @@ public class UserController {
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> createUser(@RequestBody UserDto userDto) {
-        User user = userMapper.mapToUser(userDto);
-        userService.saveUser(user);
+        userService.saveUser(userDto);
         return ResponseEntity.ok().build();
     }
 
     @PutMapping(value = "/block_user/{userId}")
     public ResponseEntity<Void> blockUser(@PathVariable Long userId) throws UserNotFoundException {
-        User user = userService.getUser(userId);
-        user.setStatus("0");
-        userService.saveUser(user);
+        userService.blockUser(userId);
         return ResponseEntity.ok().build();
     }
 
     @GetMapping(value = "/generate_key/{userId}")
     public ResponseEntity<Long> generateKey(@PathVariable Long userId) throws UserNotFoundException {
-        User user = userService.getUser(userId);
-        Token token = userService.generateToken(userId);
-        Long generatedKey = token.getKey();
-        user.setUserKey(generatedKey);
-        userService.saveUser(user);
-        return ResponseEntity.ok(userMapper.mapToUserDto(user).getUserKey());
+        Long userKey = userService.generateToken(userId);
+        return ResponseEntity.ok(userKey);
     }
 }
