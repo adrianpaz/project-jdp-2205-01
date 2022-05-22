@@ -1,5 +1,6 @@
 package com.kodilla.ecommercee.dto;
 
+import com.kodilla.ecommercee.domain.User;
 import lombok.*;
 
 import java.util.List;
@@ -10,6 +11,6 @@ import java.util.List;
 public class CartDto {
 
     private Long id;
-    private Long userId;
+    private User user;
     private List<CartItemDto> cartItems;
 }
