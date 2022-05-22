@@ -21,9 +21,7 @@ public class GroupMapper {
         return new Group(
                 groupDto.getId(),
                 groupDto.getName(),
-                groupDto.getProducts().stream()
-                        .map(productMapper::mapToProduct)
-                        .collect(Collectors.toList())
+                productMapper.mapToProductList(groupDto.getProducts())
         );
     }
 
@@ -31,7 +29,7 @@ public class GroupMapper {
         return new GroupDto(
                 group.getId(),
                 group.getName(),
-                productMapper.mapToProductList(group.getProducts())
+                productMapper.mapToProductDtoList(group.getProducts())
         );
     }
 
