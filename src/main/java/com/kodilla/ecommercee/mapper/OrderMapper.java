@@ -2,9 +2,12 @@ package com.kodilla.ecommercee.mapper;
 
 import com.kodilla.ecommercee.domain.Order;
 import com.kodilla.ecommercee.dto.OrderDto;
+import com.kodilla.ecommercee.exception.UserNotFoundException;
+import com.kodilla.ecommercee.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -13,11 +16,11 @@ import java.util.stream.Collectors;
 public class OrderMapper {
 
     private final OrderItemMapper orderItemMapper;
-
-    public Order mapToOrder(final OrderDto orderDto) {
+    private final UserService userService;
+    public Order mapToOrder(final OrderDto orderDto) throws UserNotFoundException {
         return new Order(
                 orderDto.getId(),
-                orderDto.getUser(),
+                userService.getUser(orderDto.getUserId()),
                 orderItemMapper.mapToOrderItemList(orderDto.getOrderItems())
         );
     }
@@ -25,7 +28,7 @@ public class OrderMapper {
     public OrderDto mapToOrderDto(final Order order) {
         return new OrderDto(
                 order.getId(),
-                order.getUser(),
+                order.getUser().getId(),
                 orderItemMapper.mapToOrderItemDtoList(order.getOrderItems())
         );
     }
@@ -36,9 +39,17 @@ public class OrderMapper {
                 .collect(Collectors.toList());
     }
 
-    public List<Order> mapToOrderList(final List<OrderDto> orderDtoList) {
-        return orderDtoList.stream()
-                .map(this::mapToOrder)
-                .collect(Collectors.toList());
+    public List<Order> mapToOrderList(final List<OrderDto> orderDtoList) throws UserNotFoundException {
+        List<Order> collect = new ArrayList<>();
+        for (OrderDto orderDto : orderDtoList) {
+            Order order = null;
+            try{
+                order = mapToOrder(orderDto);
+            }catch(UserNotFoundException e){
+
+            }
+            collect.add(order);
+        }
+        return collect;
     }
 }

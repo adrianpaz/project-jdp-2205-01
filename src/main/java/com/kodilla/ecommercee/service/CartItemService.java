@@ -13,12 +13,16 @@ import java.util.List;
 public class CartItemService {
     private final CartItemRepository cartItemRepository;
 
-    public CartItem getCartItem(Long id) throws CartItemNotFoundException {
+    public CartItem getCartItem(final Long id) throws CartItemNotFoundException {
         return  cartItemRepository.findById(id).orElseThrow(CartItemNotFoundException::new);
     }
-    public void deleteCartItem(Long cartItemId){cartItemRepository.deleteById(cartItemId);}
+    public void deleteCartItem(final Long cartItemId){cartItemRepository.deleteById(cartItemId);}
 
-    public void deleteCartItemList(List<CartItem> cartItems){
+    public CartItem save(final CartItem cartItem){
+        return cartItemRepository.save(cartItem);
+    }
+
+    public void deleteCartItemList(final List<CartItem> cartItems){
         for(CartItem cartItem: cartItems){
             cartItemRepository.deleteById(cartItem.getId());
         }

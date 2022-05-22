@@ -13,6 +13,6 @@ import java.util.List;
 public class OrderDto {
 
     private Long id;
-    private User user;
+    private Long userId;
     private List<OrderItemDto> orderItems;
 }

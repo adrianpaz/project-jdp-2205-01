@@ -1,6 +1,7 @@
 package com.kodilla.ecommercee.mapper;
 
 import com.kodilla.ecommercee.domain.Group;
+import com.kodilla.ecommercee.domain.Product;
 import com.kodilla.ecommercee.dto.GroupDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,9 +22,7 @@ public class GroupMapper {
         return new Group(
                 groupDto.getId(),
                 groupDto.getName(),
-                groupDto.getProducts().stream()
-                        .map(productMapper::mapToProduct)
-                        .collect(Collectors.toList())
+                productMapper.mapToProductList(groupDto.getProducts())
         );
     }
 
@@ -31,7 +30,7 @@ public class GroupMapper {
         return new GroupDto(
                 group.getId(),
                 group.getName(),
-                productMapper.mapToProductList(group.getProducts())
+                productMapper.mapToProductDtoList(group.getProducts())
         );
     }
 

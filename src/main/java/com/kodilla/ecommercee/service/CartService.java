@@ -20,7 +20,9 @@ public class CartService {
     public Cart getCart(final Long id) throws CartNotFoundException{
         return cartRepository.findById(id).orElseThrow(CartNotFoundException::new);
     }
-    public Cart saveCart(final Cart cart){ return cartRepository.save(cart);}
+    public Cart saveCart(final Cart cart){
+
+        return cartRepository.save(cart);}
 
     public void addCartItem(final Long id, final CartItem cartItem){
         cartRepository.findById(id).get().getCartItems().add(cartItem);
@@ -37,8 +39,7 @@ public class CartService {
 
     public Order createOrderByCart(final User user,final List<CartItem> cartItems){
         Order order = new Order(user);
-        ArrayList<CartItem> cartItemArrayList = (ArrayList<CartItem>) cartItems;
-        for(CartItem cartItem: cartItemArrayList){
+        for(CartItem cartItem: cartItems){
             order.getOrderItems().add(new OrderItem(order,cartItem.getProduct(),cartItem.getQuantity()));
         }
         return order;

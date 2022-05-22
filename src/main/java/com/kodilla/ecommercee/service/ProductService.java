@@ -40,11 +40,15 @@ public class ProductService {
                 .removeIf(cartItem -> cartItem.getId().longValue() == cartItemId.longValue());
     }
 
-    public void removeCartItems(List <CartItem> cartItems){
+    public void removeCartItems(final List <CartItem> cartItems){
+        System.out.println(cartItems.size());
         for(CartItem cartItem: cartItems){
-            productRepository.findById(cartItem.getProduct().getId()).get().getCartItems()
-                    .removeIf(Item -> Item.getId().longValue() == cartItem.getId().longValue());
+            Product product = cartItem.getProduct();
+            System.out.println("ID: "+ cartItem.getId());
+            removeCartItem(product.getId(),cartItem.getId());
+            saveProduct(product);
         }
+
     }
 }
 

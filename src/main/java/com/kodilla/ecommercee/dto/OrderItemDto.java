@@ -10,7 +10,7 @@ import lombok.*;
 public class OrderItemDto {
 
     private Long id;
-    private Order order;
-    private Product product;
+    private Long orderId;
+    private Long productId;
     private int quantity;
 }

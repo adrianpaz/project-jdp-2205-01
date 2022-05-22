@@ -2,14 +2,18 @@ package com.kodilla.ecommercee.mapper;
 
 import com.kodilla.ecommercee.domain.User;
 import com.kodilla.ecommercee.dto.UserDto;
+import com.kodilla.ecommercee.exception.UserNotFoundException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class UserMapper {
 
-    private OrderMapper orderMapper;
+    private final OrderMapper orderMapper;
 
-    public User mapToUser(final UserDto userDto) {
+
+    public User mapToUser(final UserDto userDto) throws UserNotFoundException {
         return new User(
                 userDto.getId(),
                 userDto.getUsername(),
