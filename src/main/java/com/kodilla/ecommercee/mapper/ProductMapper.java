@@ -14,8 +14,9 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class ProductMapper {
     private final CartItemMapper cartItemMapper;
+    private OrderItemMapper orderItemMapper;
 
-    public Product mapToProduct(final ProductDto productDto)  {
+    public Product mapToProduct(final ProductDto productDto) {
         return new Product(
                 productDto.getId(),
                 productDto.getName(),
@@ -23,7 +24,7 @@ public class ProductMapper {
                 productDto.getPrice(),
                 productDto.getGroup(),
                 cartItemMapper.mapToCartItemList(productDto.getCartItems()),
-                null
+                orderItemMapper.mapToOrderItemList(productDto.getOrderItems())
         );
     }
 
@@ -35,7 +36,7 @@ public class ProductMapper {
                 product.getPrice(),
                 product.getGroup(),
                 cartItemMapper.mapToCartItemDtoList(product.getCartItems()),
-                null
+                orderItemMapper.mapToOrderItemDtoList(product.getOrderItems())
         );
     }
 
