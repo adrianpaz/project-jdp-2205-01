@@ -17,10 +17,8 @@ import java.util.Random;
 public class UserService {
 
     private final UserRepository userRepository;
-    private final UserMapper userMapper;
 
-    public void saveUser(final UserDto userDto) {
-        User user = userMapper.mapToUser(userDto);
+    public void saveUser(final User user) throws UserNotFoundException{;
         userRepository.save(user);
     }
 
@@ -43,6 +41,6 @@ public class UserService {
         new Token((long)generatedKey, keyCreationTime, keyExpirationTime);
         user.setUserKey((long)generatedKey);
         userRepository.save(user);
-        return userMapper.mapToUserDto(user).getUserKey();
+        return user.getUserKey();
     }
 }

@@ -3,11 +3,14 @@ package com.kodilla.ecommercee.controller;
 import com.kodilla.ecommercee.domain.Cart;
 import com.kodilla.ecommercee.domain.CartItem;
 import com.kodilla.ecommercee.domain.Order;
+import com.kodilla.ecommercee.domain.Product;
 import com.kodilla.ecommercee.dto.CartDto;
 import com.kodilla.ecommercee.dto.CartItemDto;
+import com.kodilla.ecommercee.dto.ProductDto;
 import com.kodilla.ecommercee.exception.*;
 import com.kodilla.ecommercee.mapper.CartItemMapper;
 import com.kodilla.ecommercee.mapper.CartMapper;
+import com.kodilla.ecommercee.mapper.ProductMapper;
 import com.kodilla.ecommercee.repository.OrderRepository;
 import com.kodilla.ecommercee.service.*;
 import lombok.RequiredArgsConstructor;
@@ -24,7 +27,7 @@ public class CartController {
 
     private final CartService cartService;
     private final CartItemService cartItemService;
-    private final ProductService productService;
+    private final ProductMapper productMapper;
     private final CartMapper cartMapper;
     private final CartItemMapper cartItemMapper;
     private final OrderService orderService;
@@ -38,10 +41,9 @@ public class CartController {
     }
 
     @GetMapping(value = "{cartId}")
-    public ResponseEntity<List<CartItemDto>> getItemsFromCart(@PathVariable Long cartId) throws CartNotFoundException {
-        Cart cart = cartService.getCart(cartId);
-        List<CartItemDto> cartItemsDto = cartItemMapper.mapToCartItemDtoList(cart.getCartItems());
-        return ResponseEntity.ok(cartItemsDto);
+    public ResponseEntity<List<ProductDto>> getItemsFromCart(@PathVariable Long cartId) throws CartNotFoundException {
+        List<CartItem> cartItems = cartService.getCart(cartId).getCartItems();
+        return ResponseEntity.ok(productMapper.mapToProductDtoList(cartItemService.cartItemsToProduct(cartItems)));
     }
 
     @PutMapping(value = "{cartId}")

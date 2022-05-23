@@ -1,12 +1,14 @@
 package com.kodilla.ecommercee.service;
 
 import com.kodilla.ecommercee.domain.CartItem;
+import com.kodilla.ecommercee.domain.Product;
 import com.kodilla.ecommercee.exception.CartItemNotFoundException;
 import com.kodilla.ecommercee.repository.CartItemRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -28,5 +30,8 @@ public class CartItemService {
         }
     }
 
-
+    public List<Product> cartItemsToProduct(List<CartItem> cartItems){
+        return  cartItems.stream().map(CartItem::getProduct)
+                .collect(Collectors.toList());
+    }
 }
