@@ -1,7 +1,9 @@
 package com.kodilla.ecommercee.service;
 
 import com.kodilla.ecommercee.domain.Group;
+import com.kodilla.ecommercee.dto.GroupDto;
 import com.kodilla.ecommercee.exception.GroupNotFoundException;
+import com.kodilla.ecommercee.mapper.GroupMapper;
 import com.kodilla.ecommercee.repository.GroupRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -13,6 +15,7 @@ import java.util.List;
 public class GroupDBService {
 
     private final GroupRepository groupRepository;
+    private final GroupMapper groupMapper;
 
     public List<Group> getAllGroups() {
         return groupRepository.findAll();
