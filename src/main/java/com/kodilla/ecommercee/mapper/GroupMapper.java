@@ -17,7 +17,6 @@ import java.util.stream.Collectors;
 public class GroupMapper {
 
     private final ProductMapper productMapper;
-    private final ProductService productService;
 
     public Group mapToGroup(final GroupDto groupDto) throws ProductNotFoundException {
         return new Group(

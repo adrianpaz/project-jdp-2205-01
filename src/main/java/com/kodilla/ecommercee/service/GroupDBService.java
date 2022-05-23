@@ -15,7 +15,6 @@ import java.util.List;
 public class GroupDBService {
 
     private final GroupRepository groupRepository;
-    private final GroupMapper groupMapper;
 
     public List<Group> getAllGroups() {
         return groupRepository.findAll();
