@@ -18,7 +18,7 @@ public class GroupMapper {
 
     private final ProductMapper productMapper;
 
-    public Group mapToGroup(final GroupDto groupDto) throws ProductNotFoundException {
+    public Group mapToGroup(final GroupDto groupDto) {
         return new Group(
                 groupDto.getId(),
                 groupDto.getName(),
@@ -26,7 +26,7 @@ public class GroupMapper {
         );
     }
 
-    public GroupDto mapToGroupDto(final Group group) throws ProductNotFoundException {
+    public GroupDto mapToGroupDto(final Group group) {
         return new GroupDto(
                 group.getId(),
                 group.getName(),
@@ -35,30 +35,8 @@ public class GroupMapper {
     }
 
     public List<GroupDto> mapToGroupDtoList(final List<Group> groupList) {
-        List<GroupDto> collect = new ArrayList<>();
-        for (Group group : groupList) {
-            GroupDto groupDto = null;
-            try {
-                groupDto = mapToGroupDto(group);
-            } catch (ProductNotFoundException e) {
-                e.printStackTrace();
-            }
-            collect.add(groupDto);
-        }
-        return collect;
-    }
-
-    public List<Group> maToGroupList(List<GroupDto> groupDtoList) {
-        List<Group> collect = new ArrayList<>();
-        for (GroupDto groupDto : groupDtoList) {
-            Group group = null;
-            try {
-                group = mapToGroup(groupDto);
-            } catch (ProductNotFoundException e) {
-                e.printStackTrace();
-            }
-            collect.add(group);
-        }
-        return collect;
+        return groupList.stream()
+                .map(this::mapToGroupDto)
+                .collect(Collectors.toList());
     }
 }

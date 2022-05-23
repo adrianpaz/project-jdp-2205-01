@@ -29,19 +29,19 @@ public class GroupController {
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> createGroup(@RequestBody GroupDto groupDto) throws ProductNotFoundException {
+    public ResponseEntity<Void> createGroup(@RequestBody GroupDto groupDto) {
         Group group = groupMapper.mapToGroup(groupDto);
         groupDBService.saveGroup(group);
         return ResponseEntity.ok().build();
     }
 
     @GetMapping(value = "{groupId}")
-    public ResponseEntity<GroupDto> getGroupById(@PathVariable Long groupId) throws GroupNotFoundException, ProductNotFoundException {
+    public ResponseEntity<GroupDto> getGroupById(@PathVariable Long groupId) throws GroupNotFoundException {
         return ResponseEntity.ok(groupMapper.mapToGroupDto(groupDBService.getGroupById(groupId)));
     }
 
     @PutMapping
-    public ResponseEntity<GroupDto> updateGroup(@RequestBody GroupDto groupDto) throws ProductNotFoundException {
+    public ResponseEntity<GroupDto> updateGroup(@RequestBody GroupDto groupDto) {
         Group group = groupMapper.mapToGroup(groupDto);
         Group saveGroup = groupDBService.saveGroup(group);
         return ResponseEntity.ok(groupMapper.mapToGroupDto(saveGroup));
