@@ -16,6 +16,7 @@ public class ProductMapper {
     private final CartItemMapper cartItemMapper;
     private final OrderItemMapper orderItemMapper;
     private final GroupDBService groupDBService;
+
     public Product mapToProduct(final ProductDto productDto) throws GroupNotFoundException {
         return new Product(
                 productDto.getId(),

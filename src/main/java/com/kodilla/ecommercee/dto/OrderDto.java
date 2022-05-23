@@ -1,9 +1,6 @@
 package com.kodilla.ecommercee.dto;
 
-import com.kodilla.ecommercee.domain.User;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.List;
 

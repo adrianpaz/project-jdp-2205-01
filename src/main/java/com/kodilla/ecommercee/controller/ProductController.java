@@ -37,7 +37,6 @@ public class ProductController {
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> createProduct(@RequestBody ProductDto productDto) throws GroupNotFoundException {
-
         Product product = productMapper.mapToProduct(productDto);
         productService.saveProduct(product);
         return ResponseEntity.ok().build();

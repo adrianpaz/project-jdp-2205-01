@@ -23,7 +23,6 @@ public class OrderController {
 
     private final OrderService orderService;
     private final OrderMapper orderMapper;
-    private final OrderItemMapper orderItemMapper;
 
     @GetMapping
     public ResponseEntity<List<OrderDto>> getOrders() {
@@ -39,30 +38,22 @@ public class OrderController {
     }
 
     @GetMapping(value = "{orderId}")
-    public ResponseEntity<OrderDto> getOrder(@PathVariable Long orderId) throws OrderNotFoundException {
+    public ResponseEntity<OrderDto> getOrder(@PathVariable Long orderId) throws OrderNotFoundException, UserNotFoundException {
         return ResponseEntity.ok(orderMapper.mapToOrderDto(orderService.getOrder(orderId)));
     }
 
-    //tu jest wersja do pobierania pobrania elementów z zamówienia
-    //wydaje mi się, że nie jest to potrzebna metoda
-    //@GetMapping(value = "{orderId}")
-    //public ResponseEntity<List<OrderItemDto>> getItemsFromOrder(@PathVariable Long orderId) throws OrderNotFoundException {
-    //    Order order = orderService.getOrder(orderId);
-    //    List<OrderItemDto> orderItemsDto = orderItemMapper.mapToOrderItemDtoList(order.getOrderItems());
-    //    return ResponseEntity.ok(orderItemsDto);
-    //}
-
     @PutMapping
+
     public ResponseEntity<OrderDto> updateOrder(@RequestBody OrderDto orderDto) throws UserNotFoundException {
+
         Order order = orderMapper.mapToOrder(orderDto);
         Order savedOrder = orderService.saveOrder(order);
         return ResponseEntity.ok(orderMapper.mapToOrderDto(savedOrder));
     }
 
     @DeleteMapping(value = "{orderId}")
-    public ResponseEntity<Void> deleteOrder(@PathVariable Long orderId) throws OrderNotFoundException {
-        OrderDto orderDto = orderMapper.mapToOrderDto(orderService.getOrder(orderId));
-        orderService.deleteOrder(orderDto.getId());
+    public ResponseEntity<Void> deleteOrder(@PathVariable Long orderId) {
+        orderService.deleteOrder(orderId);
         return ResponseEntity.ok().build();
     }
 }

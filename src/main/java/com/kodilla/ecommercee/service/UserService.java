@@ -2,7 +2,9 @@ package com.kodilla.ecommercee.service;
 
 import com.kodilla.ecommercee.domain.Token;
 import com.kodilla.ecommercee.domain.User;
+import com.kodilla.ecommercee.dto.UserDto;
 import com.kodilla.ecommercee.exception.UserNotFoundException;
+import com.kodilla.ecommercee.mapper.UserMapper;
 import com.kodilla.ecommercee.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,8 +17,10 @@ import java.util.Random;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final UserMapper userMapper;
 
-    public void saveUser(final User user) {
+    public void saveUser(final UserDto userDto) {
+        User user = userMapper.mapToUser(userDto);
         userRepository.save(user);
     }
 
@@ -24,12 +28,21 @@ public class UserService {
         return userRepository.findById(userId).orElseThrow(UserNotFoundException::new);
     }
 
-    public Token generateToken(final Long userId) {
+    public void blockUser(final Long userId) throws UserNotFoundException {
+        User user = getUser(userId);
+        user.setStatus("0");
+        userRepository.save(user);
+    }
+
+    public Long generateToken(final Long userId) throws UserNotFoundException {
+        User user = getUser(userId);
         Random randomGenerator = new Random();
         int generatedKey = randomGenerator.nextInt(99999 - 10000) + 10000;
         LocalTime keyCreationTime = LocalTime.now();
         LocalTime keyExpirationTime = keyCreationTime.plusHours(1);
-        Token token = new Token((long)generatedKey, keyCreationTime, keyExpirationTime);
-        return token;
+        new Token((long)generatedKey, keyCreationTime, keyExpirationTime);
+        user.setUserKey((long)generatedKey);
+        userRepository.save(user);
+        return userMapper.mapToUserDto(user).getUserKey();
     }
 }

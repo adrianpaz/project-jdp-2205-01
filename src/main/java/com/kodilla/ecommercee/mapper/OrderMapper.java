@@ -17,6 +17,7 @@ public class OrderMapper {
 
     private final OrderItemMapper orderItemMapper;
     private final UserService userService;
+
     public Order mapToOrder(final OrderDto orderDto) throws UserNotFoundException {
         return new Order(
                 orderDto.getId(),
@@ -25,7 +26,7 @@ public class OrderMapper {
         );
     }
 
-    public OrderDto mapToOrderDto(final Order order) {
+    public OrderDto mapToOrderDto(final Order order) throws UserNotFoundException {
         return new OrderDto(
                 order.getId(),
                 order.getUser().getId(),
@@ -34,18 +35,26 @@ public class OrderMapper {
     }
 
     public List<OrderDto> mapToOrderDtoList(final List<Order> orderList) {
-        return orderList.stream()
-                .map(this::mapToOrderDto)
-                .collect(Collectors.toList());
+        List<OrderDto> collect = new ArrayList<>();
+        for (Order order : orderList) {
+            OrderDto orderDto = null;
+            try {
+                orderDto = mapToOrderDto(order);
+            } catch (UserNotFoundException e) {
+                e.printStackTrace();
+            }
+            collect.add(orderDto);
+        }
+        return collect;
     }
 
     public List<Order> mapToOrderList(final List<OrderDto> orderDtoList) {
         List<Order> collect = new ArrayList<>();
         for (OrderDto orderDto : orderDtoList) {
             Order order = null;
-            try{
+            try {
                 order = mapToOrder(orderDto);
-            }catch(UserNotFoundException e){
+            } catch (UserNotFoundException e) {
                 e.printStackTrace();
             }
             collect.add(order);
