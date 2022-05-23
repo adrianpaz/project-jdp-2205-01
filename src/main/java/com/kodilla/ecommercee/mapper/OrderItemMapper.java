@@ -6,22 +6,24 @@ import com.kodilla.ecommercee.exception.OrderNotFoundException;
 import com.kodilla.ecommercee.exception.ProductNotFoundException;
 import com.kodilla.ecommercee.service.OrderService;
 import com.kodilla.ecommercee.service.ProductService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class OrderItemMapper {
 
-    private OrderService orderService;
-    private ProductService productService;
+    private final OrderService orderService;
+    private final ProductService productService;
 
     public OrderItem mapToOrderItem(OrderItemDto orderItemDto) throws OrderNotFoundException, ProductNotFoundException {
         return new OrderItem(
                 orderItemDto.getId(),
-                orderService.getOrder(orderItemDto.getOrder().getId()),
-                productService.getProduct(orderItemDto.getProduct().getId()),
+                orderService.getOrder(orderItemDto.getOrderId()),
+                productService.getProduct(orderItemDto.getProductId()),
                 orderItemDto.getQuantity()
         );
     }
@@ -29,8 +31,8 @@ public class OrderItemMapper {
     public OrderItemDto mapToOrderItemDto(OrderItem orderItem) throws OrderNotFoundException, ProductNotFoundException {
         return new OrderItemDto(
                 orderItem.getId(),
-                orderService.getOrder(orderItem.getOrder().getId()),
-                productService.getProduct(orderItem.getProduct().getId()),
+                orderItem.getOrder().getId(),
+                orderItem.getProduct().getId(),
                 orderItem.getQuantity()
         );
     }
@@ -41,9 +43,7 @@ public class OrderItemMapper {
             OrderItem orderItem = null;
             try {
                 orderItem = mapToOrderItem(orderItemDto);
-            } catch (OrderNotFoundException e) {
-                e.printStackTrace();
-            } catch (ProductNotFoundException e) {
+            } catch (OrderNotFoundException | ProductNotFoundException e) {
                 e.printStackTrace();
             }
             collect.add(orderItem);
@@ -57,9 +57,7 @@ public class OrderItemMapper {
             OrderItemDto orderItemDto = null;
             try {
                 orderItemDto = mapToOrderItemDto(orderItem);
-            } catch (OrderNotFoundException e) {
-                e.printStackTrace();
-            } catch (ProductNotFoundException e) {
+            } catch (OrderNotFoundException | ProductNotFoundException e) {
                 e.printStackTrace();
             }
             collect.add(orderItemDto);

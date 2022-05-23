@@ -43,7 +43,9 @@ public class OrderController {
     }
 
     @PutMapping
-    public ResponseEntity<OrderDto> updateOrder(@RequestBody OrderDto orderDto) throws UserNotFoundException{
+
+    public ResponseEntity<OrderDto> updateOrder(@RequestBody OrderDto orderDto) throws UserNotFoundException {
+
         Order order = orderMapper.mapToOrder(orderDto);
         Order savedOrder = orderService.saveOrder(order);
         return ResponseEntity.ok(orderMapper.mapToOrderDto(savedOrder));

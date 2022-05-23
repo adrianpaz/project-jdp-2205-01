@@ -1,6 +1,7 @@
 package com.kodilla.ecommercee.mapper;
 
 import com.kodilla.ecommercee.domain.Group;
+import com.kodilla.ecommercee.domain.Product;
 import com.kodilla.ecommercee.dto.GroupDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
