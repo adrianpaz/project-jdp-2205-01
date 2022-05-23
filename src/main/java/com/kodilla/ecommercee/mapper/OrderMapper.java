@@ -39,14 +39,14 @@ public class OrderMapper {
                 .collect(Collectors.toList());
     }
 
-    public List<Order> mapToOrderList(final List<OrderDto> orderDtoList) throws UserNotFoundException {
+    public List<Order> mapToOrderList(final List<OrderDto> orderDtoList) {
         List<Order> collect = new ArrayList<>();
         for (OrderDto orderDto : orderDtoList) {
             Order order = null;
             try{
                 order = mapToOrder(orderDto);
             }catch(UserNotFoundException e){
-
+                e.printStackTrace();
             }
             collect.add(order);
         }
